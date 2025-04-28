@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+</head>
+<body>
+    <header>
+        <div class="header-container">
+
+            <div class="redirect-container">
+                <a href="home.html"><h4>Hjem</h4></a>
+                <a href="simulation.html"><h4>Simulation</h4></a>
+                <a href="settings.html"><h4>Indstillinger</h4></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="sim-title-container">
+            <h1>Simulation</h1>
+        </div>
+
+        <div class="sim-info-container">
+            <b>Bølgefunktioner</b>
+            <p>
+                Kvantepartikeler skal altså beksrives som sandsynlighedsfordelinger. Dette gøres vha. bølgefunktion \(\psi(x)\). 
+                Dette er en kompleks funktion af x-positionen. For at finde sandsynlighedsfordelingen skal man tage kvadratet af den absolutte værdi af bølgefunktionen
+                \(|\psi(x)|^2\). For at finde, hvordan denne ændrer sig med tiden bruges Schrödinger ligningen, der siger at 
+                \(-\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2}\psi(x,t)+V(x)\psi(x,t)=i\hbar\frac{\partial \psi(x,t)}{\partial t}\). 
+                Dog er dette svært eller i mange tildfælde umuligt at løse, og derfor bruges der på denne side en approksimation til at løse den for at finde bølgefunktion som funktion af tid \(\psi(x,t)\).
+                I denne simulation vil partiklerne ved start beskrives som en normalfordeling eller gaussisk fordeling af formen \(Ae^{-(x-x_0)^2/2\sigma_0^2}\).
+                
+            </p>
+            
+            <b>Tidsevolution of Hamiltonian</b>
+            <p>
+                Som sagt vil bølgefunktionen og dermed sandsynlighedsfordelingen for partiklen her approksimeres. Dette gøres ved at beskrive bølgefunktionen som N punkter i stedet for en hel funktion.
+                Dette repræsenteres ved \(|\psi(x,t)>\), og for finde den til en senere tid bruges \(|\psi(x,t+\Delta t)>\ =e^{-iH\Delta t}|\psi(x,t)>\). 
+                Her er \(H\) Hamiltonian operatoren, der giver den samlede energi til en partikel ved position x og er lig \(H=-{1\over 2}\frac{\partial^2}{\partial x^2}+V(x)\). 
+                Denne kan udregnes vha. simple matrix operationer, hvis blot potentialet angives. 
+                <br><br>
+                Under kan du selv se resultaterne af dette. Du kan først vælge typen af potentiale fra dropdrown menuen under. 
+                Under selve simulationen kan du derefter ændrer hastigheden og positionen af partikel, samt hvor præcist positionen kendes ved start (bredden af bølgefunktionen).
+                Derudover kan positionen, energien og bredden af potentialet også ændres under. Efter dette kan du trykke på "Start Simulation" knappen for at loade simulationen, som kan tage et stykke tid.
+                Efter dette kan simulationen pauses, spoles frem og tilbage, og andre muligheder, som ses direkte under simulationsvinduet. 
+                I selve simulationen ses potentialet med rødt, mens den reele del af bølgefunktionen er vist med blåt, og sandsynlighedsfordelingen ses med sort.
+                Arealet under den sorte graf mellem to punkter viser altså sandsynligheden for at finde partiklen et sted mellem de to punkter. 
+            </p>
+        
+        </div>
+
+        <div class="sim-canvas-container">
+            <div class="sim-canvas-options">
+                <div class="sim-options-container">
+                    <div class="">
+                        <label for="sim-potential">Potentiale:</label>
+        
+                        <select name="sim-potential" id="sim-potential">
+                            <option value="constant">Konstant</option>
+                            <option value="step">Step</option>
+                            <option value="well">Brønd</option>
+                            <option value="barrier">Barriere</option>
+                            <option value="harmonic">Harmonisk oscillator</option>
+                        </select> 
+                    </div>
+    
+                    <div class="">
+                        <!-- <label for="sim-type">Bølgefunktion:</label>
+        
+                        <select name="sim-type" id="sim-type">
+                            <option value="packet">Bølgepakke</option>
+                            <option value="stationary">Stationær</option>
+                        </select>  -->
+                    </div>
+        
+                </div>
+
+                <div class="sim-before-start-options">
+                    <button class="sim-btn" id="sim-start-btn"><b>Start Simulation</b></button>
+                    
+                    <!-- Restart simulation button -->
+                    <button id="sim-restart-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="sim-after-time-options">
+                    <!-- Change simulation max time and ending option (replay, stop, continue) -->
+                    <div class="">
+                        <label for="sim-time-boundary">Slutopførsel:</label>
+                        <select name="sim-time-boundary" id="sim-time-boundary">
+                            <option value="loop">Løkke</option>
+                            <option value="once">En gang</option>
+                            <option value="continue">Fortsæt</option>
+                        </select> 
+                    </div>
+    
+                    <div class="">
+                        <!-- Max tid af simulationen, skjul hvis "Fortsæt" -->
+                        <label for="sim-max-time">Max tid</label>
+                        <input type="number" value="10" name="sim-max-time" id="sim-max-time">
+                    </div>
+                </div>
+            </div>
+            
+
+            <canvas id="sim-canvas" width="1200" height="600"></canvas>
+        </div>
+
+        
+        <div class="sim-playing-options-container">
+
+            <!-- add options for playing, stopping, forward, back, step forward, step back, restart, (maybe change simulation speed here) -->
+
+            <!-- speed down -->
+            <button id="playing-speed-down-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                </svg>
+            </button>
+
+            <!-- step back -->
+            <button id="playing-step-back-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                </svg>
+            </button>
+
+            <!-- back -->
+            <button id="playing-back-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                <path d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                </svg>
+            </button>
+            
+            <!-- pause -->
+            <button id="playing-pause-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause-fill" viewBox="0 0 16 16">
+                    <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/>
+                </svg>
+            </button>
+            
+            <!-- forward -->
+            <button id="playing-forward-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                </svg>
+            </button>
+            
+            <!-- step forward -->
+            <button id="playing-step-forward-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </button>
+            
+            <!-- speed up -->
+            <button  id="playing-speed-up-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+            </button>
+        
+        </div>
+
+        <div class="sim-combined-options">
+            <div class="sim-wavefunction-options-container">
+                <h3 class="sim-name-set">Bølgefunktion Indstinllinger</h3>
+                <div class="">
+                    <label for="wavefunction-position">Start position</label>
+                    <input type="number" value="0" min="-50" max="50" name="wavefunction-position" id="wavefunction-position">
+                </div>
+                
+                <div class="">
+                    <label for="wavefunction-velocity">Start hastighed</label>
+                    <input type="number" value="0" min="-15" max="15" name="wavefunction-velocity" id="wavefunction-velocity">
+                </div>
+                
+                <div class="">
+                    <label for="wavefunction-width">Start spredning</label>
+                    <input type="number" value="3" min="1" max="10" name="wavefunction-width" id="wavefunction-width">
+                </div>
+            </div>
+
+            <div class="middle-spacer"></div>
+
+            <div class="sim-potential-options-container">
+                <h3 class="sim-name-set">Potentiale Indstinllinger</h3>
+                <div class="">
+                    <label for="potential-position">Start position</label>
+                    <input type="number" value="0" min="-50" max="50" name="potential-position" id="potential-position">
+                </div>
+                
+                <div class="">
+                    <label for="potential-energy">Start energi</label>
+                    <input type="number" value="1" min="-10" max="10" name="potential-energy" id="potential-energy">
+                </div>
+                
+                <div class="">
+                    <label for="potential-width">Start bredde</label>
+                    <input type="number" value="10" min="0" max="50" name="potential-width" id="potential-width">
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Lavet Af: Asger Krag Morild</p>
+        <p>H. C. Ørsted</p>
+        <p>&#169; 2025</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.0.0/math.js"></script>
+    <script src="simulation.js" type="module"></script>
+</body>
+</html>

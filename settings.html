@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indstillinger</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+
+            <div class="redirect-container">
+                <a href="home.html"><h4>Hjem</h4></a>
+                <a href="simulation.html"><h4>Simulation</h4></a>
+                <a href="settings.html"><h4>Indstillinger</h4></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="settings-title-container">
+            <h1>Indstillinger</h1>
+        </div>
+
+        <div class="settings-info-container">
+            <b>Approksimationer</b>
+            <p>
+                I programmet bruges der som sagt approksimationer til at udregne udviklingen af bølgefunktionen, og disse kan styres fra denne side. 
+                Her kan der styres, hvor langt et skridt frem i tiden (dt), der tages, hver gang simulationen opdateres.
+                Derudover kan der for bølgefunktionen ændres, hvor mange punkter som funktionen beskrives ved (N), og altså hvor tæt bølgefunktionen bliver på den rigtige funktion, samt at være glat og uden knæk.
+                Til sidst kan afstanden mellem disse punkter for bølgefunktionen (dx) også varieres. 
+            </p>
+        </div>
+
+        <div class="settings-options-container">
+            <div class="">
+                <h2>Tid</h2>
+                
+                <!-- Controls how much the time step is, i.e. dt in the TimeEvolutionOperator -->
+                 <div class="">
+                     <label for="settings-time-step">Tidsskridt (dt)</label>
+                     <input type="number" value="10" min="1" max="50" name="settings-time-step" id="settings-time-step">
+                 </div>
+            </div>
+            
+            <div class="">
+                <h2>Position</h2>
+
+                <!-- add total interval size, and approximation  -->
+                 <div class="">
+                     <label for="settings-position-count">Antal af punkter til approksimation (N)</label>
+                     <input type="number" value="100" min="25" max="500" name="settings-position-count" id="settings-position-count">
+                 </div>
+    
+                <div class="">
+                    <label for="settings-position-step">Afstand mellem punkter (dx)</label>
+                    <input type="number" value="10" min="1" max="50" name="settings-position-step" id="settings-position-step">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Lavet Af: Asger Krag Morild</p>
+        <p>H. C. Ørsted</p>
+        <p>&#169; 2025</p>
+    </footer>
+
+    <script src="settings.js"></script>
+</body>
+</html>
