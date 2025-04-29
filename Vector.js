@@ -86,6 +86,7 @@ export default class Vector {
     }
   }
 
+  // Takes a function and uses it to initialize the corresponding vector
   initializeVectorElementsFromFunction(func, start, step) {
     for (let i = 0; i < this.size; i++) {
       // console.log(math.add(start, math.multiply(i, step)))

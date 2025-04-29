@@ -142,39 +142,6 @@ export default class Matrix {
     return new Matrix(this.xsize, this.ysize, newColumnVectors);
   }
 
-//   // Quick exponential
-//   expQuick(k, n) {
-//     const scaledMatrix = this.scale(k);
-//     let totalConstant = 1;
-
-//     let resultMatrix = new Matrix(this.xsize, this.ysize, null);
-//     resultMatrix.initializeWithDiagonal([1]);
-
-//     let progMatrix = this.scale(k);
-
-//     for (let i = 1; i < n; i++) {
-//       totalConstant *= i;
-//       // console.log(totalConstant)
-//       // console.log(progMatrix.scale(1/totalConstant).toString())
-//       resultMatrix = resultMatrix.add(progMatrix.scale(1 / totalConstant));
-//       // console.log(resultMatrix.toString())
-
-//       // console.log(progMatrix.toString())
-
-//       progMatrix = progMatrix.product(scaledMatrix);
-
-//       for (let x = 0; x < this.xsize; x++) {
-//         for (let y = 0; y < this.ysize; y++) {
-//           if (progMatrix.matrix[x].index(y) < 10 ** -8) {
-//             progMatrix.matrix[x].elements[y] = 0;
-//           }
-//         }
-//       }
-//     }
-
-//     return resultMatrix;
-//   }
-
   // Turns the matrix to a string (IMPROVE!!!, translate over diagonal)
   toString() {
     let result = "";
