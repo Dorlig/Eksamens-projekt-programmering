@@ -31,8 +31,6 @@ export default class Simulator {
     );
     this.time += 1;
 
-    this.states[this.time] = this.wavefunction;
-
     return [this.wavefunction, this.time * this.dt];
   }
 
@@ -43,8 +41,6 @@ export default class Simulator {
         this.inverseTimeEvolutionOperator
       );
       this.time -= 1;
-
-      this.states[this.time] = this.wavefunction;
 
       return [this.wavefunction, this.time * this.dt];
     } else {
