@@ -9,7 +9,10 @@ export default class Simulator {
       hamiltonian.ysize,
       null
     );
-    this.timeEvolutionOperator.matrix = hamiltonian.exp(math.complex(0, -1 * dt), 20).matrix;
+    this.timeEvolutionOperator.matrix = hamiltonian.exp(
+      math.complex(0, -1 * dt),
+      20
+    ).matrix;
     console.log("creating the inverse time evolution operator");
     this.inverseTimeEvolutionOperator = this.timeEvolutionOperator.inv();
     console.log("Finishing init: ");

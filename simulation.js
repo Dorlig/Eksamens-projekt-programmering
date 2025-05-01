@@ -45,10 +45,10 @@ let simulator = null;
 
 // Parameters for this specific simulation
 let sigma0 = parseFloat(
-    document.getElementById("wavefunction-width").defaultValue
+  document.getElementById("wavefunction-width").defaultValue
 );
 let x0 = parseFloat(
-    document.getElementById("wavefunction-position").defaultValue
+  document.getElementById("wavefunction-position").defaultValue
 );
 let p0 =
   parseFloat(document.getElementById("wavefunction-velocity").defaultValue) /
@@ -86,9 +86,12 @@ function start_simulation(dir, speed) {
     }
 
     // console.log(newWavefunction.probabilityDensity())
-    canvasContainer.setAttribute("data-before", `t=${Math.round(t*100)/100}`);
-    console.log(t, (repeat_time));
-    if (t >= (repeat_time)) {
+    canvasContainer.setAttribute(
+      "data-before",
+      `t=${Math.round(t * 100) / 100}`
+    );
+    console.log(t, repeat_time);
+    if (t >= repeat_time) {
       switch (repeat_type) {
         case 0:
           simulator.restart();
@@ -290,7 +293,6 @@ document
       simulation_running = true;
     }
   });
-
 
 // Handle updating wavefunction information
 document.getElementById("wavefunction-width").addEventListener("input", (e) => {
